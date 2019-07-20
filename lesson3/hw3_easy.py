@@ -4,14 +4,19 @@
 # Округление должно происходить по математическим правилам (0.6 --> 1, 0.4 --> 0).
 # Для решения задачи не используйте встроенные функции и функции из модуля math.
 
-def my_round(number, ndigits):
-    number = str(number)
-
+def my_round(number, toRound):
+    number = 10 ** (toRound + 1) * number
+    number = number // 1 / 10 ** (toRound + 1)
+    number = 10 ** toRound * number
+    if number % 1 >= 0.6:
+        number = number + 1
+    number = number // 1 / 10 ** toRound
+    return number
 
 
 print(my_round(2.1234567, 5))
 print(my_round(2.1999967, 5))
-print(my_round(2.9999967, 5))
+print(my_round(2.9999977, 5))
 
 
 # Задание-2:
@@ -29,5 +34,5 @@ def lucky_ticket(ticket_number):
 
 
 print(lucky_ticket(123006))
-#print(lucky_ticket(12321)) Этот пример должен был быть "пасхальным яйцом", и необходимо было обеспечить обработку ошибок?
+# print(lucky_ticket(12321)) Этот пример должен был быть "пасхальным яйцом", и необходимо было обеспечить обработку ошибок?
 print(lucky_ticket(436751))
